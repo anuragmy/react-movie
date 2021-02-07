@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageHeader } from 'antd';
+import { PageHeader, Button } from 'antd';
 
 const Header = () => {
   return (
@@ -7,9 +7,7 @@ const Header = () => {
       className='site-page-header'
       title='Movies & Shows'
       subTitle='Get the latest shows'
-      styles={{
-        textAlign: 'center',
-      }}
+      extra={[<Button key='1'>Show Favourites</Button>]}
     />
   );
 };

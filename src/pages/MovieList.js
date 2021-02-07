@@ -1,36 +1,50 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import { useDispatch, connect } from 'react-redux';
+import axios from 'axios';
 
 import MovieCards from '../components/MovieCards';
+import { loadShows } from '../store/thunk';
 
-const MovieList = () => {
+const URL = 'http://api.tvmaze.com/shows';
+
+const MovieList = ({ movies, isLoading }) => {
+  const dispatch = useDispatch();
+
+  const getMOvies = async () => {
+    await axios.get(URL).then((resp) => console.log(resp));
+  };
+  React.useEffect(() => {
+    // dispatch(loadShows());
+    getMOvies();
+  }, []);
+
   return (
     <div>
-      <Row>
-        <Col
-          xs={{ span: 24, offset: 2 }}
-          md={{ span: 12, offset: 2 }}
-          lg={{ span: 6, offset: 2 }}
-        >
-          <MovieCards />
-        </Col>
-        <Col
-          xs={{ span: 24, offset: 2 }}
-          md={{ span: 12, offset: 2 }}
-          lg={{ span: 6, offset: 2 }}
-        >
-          <MovieCards />
-        </Col>
-        <Col
-          xs={{ span: 24, offset: 2 }}
-          md={{ span: 12, offset: 2 }}
-          lg={{ span: 6, offset: 2 }}
-        >
-          <MovieCards />
-        </Col>
-      </Row>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        {movies.map(({ id, name, description }) => (
+          <MovieCards
+            loading={isLoading}
+            id={id}
+            key={id}
+            name={name}
+            description={description}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default MovieList;
+const mapStateToProps = (state) => ({
+  movies: state.movies.movies,
+  isLoading: state.isLoading,
+});
+
+export default connect(mapStateToProps)(MovieList);

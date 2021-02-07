@@ -6,8 +6,10 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
+import { movieReducer } from './reducers/reducer';
+
 const reducers = {
-  movies: [],
+  movies: movieReducer,
 };
 
 const persistConfig = {
@@ -19,6 +21,7 @@ const persistConfig = {
 const rootReducers = combineReducers(reducers);
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 export const store = createStore(
-  persistedReducer,
+  // persistedReducer,
+  combineReducers(reducers),
   composeWithDevTools(applyMiddleware(thunk, logger))
 );

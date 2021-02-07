@@ -1,12 +1,28 @@
 import * as actionTypes from '../actions/types';
 
 const initialState = {
-  movies: [],
+  movies: [
+    {
+      id: 1,
+      name: 'Friends 1',
+      description: 'good one',
+    },
+    {
+      id: 2,
+      name: 'Friends 2',
+      description: 'good one',
+    },
+    {
+      id: 3,
+      name: 'Friends 3',
+      description: 'good one',
+    },
+  ],
   favourites: [],
   isLoading: false,
 };
 
-export const movierRedicer = (state = initialState, action) => {
+export const movieReducer = (state = initialState, action) => {
   const { type, payload } = action;
   const { favourites } = state;
   switch (type) {
@@ -25,6 +41,11 @@ export const movierRedicer = (state = initialState, action) => {
       return {
         ...state,
         favourites: [...favourites, payload],
+      };
+    case actionTypes.REMOVE_FROM_FAVOURITE:
+      return {
+        ...state,
+        favourites: favourites.filter(({ id }) => id !== payload),
       };
     default:
       return state;
