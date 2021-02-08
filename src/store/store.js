@@ -12,16 +12,16 @@ const reducers = {
   movies: movieReducer,
 };
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  stateReconciler: autoMergeLevel2,
-};
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+//   stateReconciler: autoMergeLevel2,
+// };
 
 const rootReducers = combineReducers(reducers);
-const persistedReducer = persistReducer(persistConfig, rootReducers);
+// const persistedReducer = persistReducer(persistConfig, rootReducers);
 export const store = createStore(
   // persistedReducer,
-  combineReducers(reducers),
+  rootReducers,
   composeWithDevTools(applyMiddleware(thunk, logger))
 );

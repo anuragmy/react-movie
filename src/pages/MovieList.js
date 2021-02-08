@@ -1,22 +1,21 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+
 import { useDispatch, connect } from 'react-redux';
-import axios from 'axios';
 
 import MovieCards from '../components/MovieCards';
 import { loadShows } from '../store/thunk';
 
-const URL = 'http://api.tvmaze.com/shows';
-
-const MovieList = ({ movies, isLoading }) => {
+const MovieList = ({ movies, isLoading, isFav, favourites }) => {
   const dispatch = useDispatch();
+  const [data, setData] = React.useState([]);
 
-  const getMOvies = async () => {
-    await axios.get(URL).then((resp) => console.log(resp));
-  };
   React.useEffect(() => {
-    // dispatch(loadShows());
-    getMOvies();
+    if (isFav) setData(favourites);
+    else setData(movies);
+  }, [isFav]);
+
+  React.useEffect(() => {
+    dispatch(loadShows());
   }, []);
 
   return (
@@ -28,13 +27,13 @@ const MovieList = ({ movies, isLoading }) => {
           flexWrap: 'wrap',
         }}
       >
-        {movies.map(({ id, name, description }) => (
+        {movies.map(({ id, name, image }) => (
           <MovieCards
             loading={isLoading}
             id={id}
             key={id}
             name={name}
-            description={description}
+            image={image}
           />
         ))}
       </div>
@@ -44,7 +43,9 @@ const MovieList = ({ movies, isLoading }) => {
 
 const mapStateToProps = (state) => ({
   movies: state.movies.movies,
+  favourites: state.movies.favourites,
   isLoading: state.isLoading,
+  isFav: state.movies.showFav,
 });
 
 export default connect(mapStateToProps)(MovieList);
