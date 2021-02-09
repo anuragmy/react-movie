@@ -1,5 +1,5 @@
-# react-todo
-Todo App with advance react concepts
+# react-movie
+React movie app, that fetches the movies and can be added and removed from favourites
 
 # steps to run app
 
@@ -7,7 +7,5 @@ Todo App with advance react concepts
 
 2. install dependencies <code>npm i</code> or <code>yarn</code>
 
-3. install server dependecncies by <code>npm run server-install</code>
-
-4. run project by <code>npm run dev</code>
+3. run project by <code>npm run dev</code>
 
