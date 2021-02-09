@@ -8,7 +8,7 @@ import { addToFavourite, removeFromFavourite } from '../store/actions';
 const { Meta } = Card;
 
 const MovieCards = ({
-  loading = false,
+  isLoading,
   id,
   description,
   name = 'Friends',
