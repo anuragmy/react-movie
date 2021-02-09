@@ -17,8 +17,6 @@ export const movieReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case actionTypes.ADD_MOVIE:
-      console.log('movies', payload);
-
       let data = [];
       for (let i in payload) {
         data.push({
