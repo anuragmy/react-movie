@@ -4,7 +4,7 @@ import axios from 'axios';
 export const loadShows = () => async (dispatch) => {
   console.log('reached herer');
   await axios
-    .get('http://api.tvmaze.com/shows?page=1')
+    .get('https://api.tvmaze.com/shows?page=1')
     .then((res) => {
       console.log('novei data', res.data);
       dispatch(loadSuccess(res.data));
