@@ -5,6 +5,10 @@ React movie app, that fetches the movies and can be added and removed from favou
 
 https://shows.netlify.com
 
+# test cases
+
+run test case by <code>npm run test</code>
+
 # steps to run app
 
 1. clone master repo
