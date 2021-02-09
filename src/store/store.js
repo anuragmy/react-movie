@@ -9,10 +9,8 @@ const reducers = {
   movies: movieReducer,
 };
 
-export const middlewares = [thunk, logger];
-
 export const rootReducers = combineReducers(reducers);
 export const store = createStore(
   rootReducers,
-  composeWithDevTools(applyMiddleware(middlewares))
+  composeWithDevTools(applyMiddleware(thunk, logger))
 );
