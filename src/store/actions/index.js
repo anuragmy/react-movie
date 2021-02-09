@@ -23,7 +23,7 @@ export const removeFromFavourite = (data) => ({
   payload: data,
 });
 
-export const showFav = (data) => ({
+export const showFavourite = (data) => ({
   type: SHOW_FAV,
   payload: data,
 });

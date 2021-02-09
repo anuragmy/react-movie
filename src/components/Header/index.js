@@ -1,20 +1,23 @@
 import React from 'react';
 import { PageHeader, Button } from 'antd';
 import { useDispatch, connect } from 'react-redux';
-import { showFav } from '../store/actions';
+import { showFavourite } from '../../store/actions';
 
-const Header = ({ isFav }) => {
-  const [fav, setFav] = React.useState(false);
-  console.log('fav', isFav);
+const Header = ({ showFav }) => {
   const [text, setText] = React.useState('Show Favourites');
   React.useEffect(() => {
-    if (isFav) setText('Show All');
+    if (showFav) setText('Show All');
     else setText('Show Favourites');
-  }, [isFav]);
+  }, [showFav]);
   const dispatch = useDispatch();
   const toggleFavourites = () => {
-    setFav(!fav);
-    dispatch(fav ? showFav(true) : showFav(false));
+    if (showFav) {
+      dispatch(showFavourite(false));
+      setText('Show All');
+    } else {
+      setText('Show Favourites');
+      dispatch(showFavourite(true));
+    }
   };
   return (
     <PageHeader
@@ -31,7 +34,7 @@ const Header = ({ isFav }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isFav: state.movies.showFav,
+  showFav: state.movies.showFav,
 });
 
 export default connect(mapStateToProps)(Header);

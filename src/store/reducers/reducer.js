@@ -1,23 +1,7 @@
 import * as actionTypes from '../actions/types';
 
 const initialState = {
-  movies: [
-    // {
-    //   id: 1,
-    //   name: 'Friends 1',
-    //   description: 'good one',
-    // },
-    // {
-    //   id: 2,
-    //   name: 'Friends 2',
-    //   description: 'good one',
-    // },
-    // {
-    //   id: 3,
-    //   name: 'Friends 3',
-    //   description: 'good one',
-    // },
-  ],
+  movies: [],
   favourites: [],
   isLoading: false,
   showFav: false,
@@ -39,13 +23,12 @@ export const movieReducer = (state = initialState, action) => {
       for (let i in payload) {
         data.push({
           name: payload[i].name,
-          id: payload[i].id,
+          id: i,
           image: payload[i].image?.medium,
-          description: payload[i].summary,
         });
         if (i > 11) break;
       }
-      console.log('md new', data);
+
       return {
         ...state,
         movies: [...movies, ...data],
